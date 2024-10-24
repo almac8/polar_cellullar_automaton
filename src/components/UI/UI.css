@@ -1,0 +1,10 @@
+#UI {
+  background-color: orangered;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+
+  width: 30%;
+  height: 100%;
+}
