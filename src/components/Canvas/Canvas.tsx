@@ -19,6 +19,11 @@ const Canvas = () => {
     if(canvas) initializeCanvas(canvas);
   }, [ canvasRef ]);
 
+  window.addEventListener("resize", () => {
+    const canvas = canvasRef.current;
+    if(canvas) initializeCanvas(canvas);
+  });
+
   return <canvas id="Canvas" ref={ canvasRef } />;
 };
 
