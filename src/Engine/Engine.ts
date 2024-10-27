@@ -1,12 +1,15 @@
 import { engineData } from "./Data";
+import Scene from "./Scene";
 
 class Engine {
   private isRunning: boolean;
   private lastUpdateTime: number;
+  private scene: Scene;
 
   constructor() {
     this.isRunning = false;
     this.lastUpdateTime = 0;
+    this.scene = new Scene();
   }
   
   start() {
@@ -28,16 +31,19 @@ class Engine {
   }
 
   private update(deltatime: number) {
-    console.log(`Update ${ deltatime }`);
+    this.scene.update(deltatime);
   }
 
   private render(renderingContext: CanvasRenderingContext2D) {
+    this.clearCanvas(renderingContext);
+
+    this.scene.render(renderingContext);
+  }
+
+  private clearCanvas(renderingContext: CanvasRenderingContext2D) {
     renderingContext.beginPath();
     renderingContext.fillStyle = "black";
     renderingContext.fillRect(0, 0, renderingContext.canvas.width, renderingContext.canvas.height);
-    
-    renderingContext.fillStyle = "lime";
-    renderingContext.arc(renderingContext.canvas.width / 2, renderingContext.canvas.height / 2, 50, 0, 2 * Math.PI);
     renderingContext.fill();
   }
 }
