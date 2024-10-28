@@ -1,10 +1,18 @@
+import PolarTileMap from "./PolarTileMap";
+
 class Scene {
-  update(deltatime: number) {}
+  private tilemap: PolarTileMap;
+
+  constructor() {
+    this.tilemap = new PolarTileMap(8, 32);
+  }
+  
+  update(deltatime: number) {
+    this.tilemap = new PolarTileMap(8, 32);
+  }
   
   render(renderingContext: CanvasRenderingContext2D) {
-    renderingContext.fillStyle = "lime";
-    renderingContext.arc(renderingContext.canvas.width / 2, renderingContext.canvas.height / 2, 50, 0, 2 * Math.PI);
-    renderingContext.fill();
+    this.tilemap.render(renderingContext);
   }
 }
 
