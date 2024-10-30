@@ -1,5 +1,4 @@
 #UI {
-  background-color: orangered;
   position: fixed;
   top: 0;
   left: 0;
@@ -11,8 +10,23 @@
 
 .open {
   width: 16rem;
+  background-color: blueviolet;
 }
 
 .closed {
   width: 1rem;
+  background-color: orangered;
+}
+
+button {
+  background-color: blue;
+  color: orangered;
+  padding: 0.5rem 2rem;
+  width: 12rem;
+
+  border: 2px solid black;
+  border-radius: 8px;
+
+  font-size: 16pt;
+  font-weight: 900;
 }

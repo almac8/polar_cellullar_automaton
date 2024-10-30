@@ -1,3 +1,4 @@
+import { engineData } from "./Data";
 import PolarTileMap from "./PolarTileMap";
 import Vector2 from "./Vector2";
 
@@ -11,11 +12,15 @@ class Scene {
   }
   
   update(deltatime: number) {
-    this.tilemap.setTileActive(this.activeTile, false);
-    this.activeTile.y++;
-    if(this.activeTile.y >= this.tilemap.getNumTilesInRing(this.activeTile.x)) this.activeTile.y = 0;
-    
-    this.tilemap.setTileActive(this.activeTile, true);
+    if(engineData.isRunning || engineData.runOnce) {
+      console.log("Scene: Update");
+      this.tilemap.setTileActive(this.activeTile, false);
+      this.activeTile.y++;
+      if(this.activeTile.y >= this.tilemap.getNumTilesInRing(this.activeTile.x)) this.activeTile.y = 0;
+      
+      this.tilemap.setTileActive(this.activeTile, true);
+      engineData.setRunOnce(false);
+    }
   }
   
   render(renderingContext: CanvasRenderingContext2D) {
