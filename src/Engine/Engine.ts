@@ -27,7 +27,7 @@ class Engine {
 
     if(engineData.renderingContext) this.render(engineData.renderingContext);
 
-    if(this.isRunning) requestAnimationFrame(() => this.gameloop());
+    if(this.isRunning) requestIdleCallback(() => this.gameloop());
   }
 
   private update(deltatime: number) {

@@ -1,5 +1,5 @@
 import PolarTileRing from "./PolarTileRing";
-import Vector2 from "./Vector2";
+import VectorP from "./VectorP";
 
 class PolarTileMap {
   private ringWidth: number;
@@ -22,12 +22,21 @@ class PolarTileMap {
     this.rings.forEach(ring => ring.render(renderingContext));
   }
 
-  setTileActive(tileIndex: Vector2, isActive: boolean) {
-    this.rings[tileIndex.x].setTileActive(tileIndex.y, isActive);
+  setTileActive(tileIndex: VectorP, isActive: boolean) {
+    this.rings[tileIndex.radius].setTileActive(tileIndex.theta, isActive);
   }
 
   getNumTilesInRing(ringIndex: number) {
     return this.rings[ringIndex].numTiles;
+  }
+
+  getUprankCell(cellIndex: VectorP) {
+    const nextRank = cellIndex.radius === this.numRings - 1 ? 0 : cellIndex.radius + 1;
+    
+    cellIndex.theta = Math.round(cellIndex.theta / this.getNumTilesInRing(cellIndex.radius) * this.getNumTilesInRing(nextRank));
+    cellIndex.radius = nextRank;
+
+    return cellIndex;
   }
 }
 
