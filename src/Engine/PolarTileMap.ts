@@ -38,6 +38,18 @@ class PolarTileMap {
 
     return cellIndex;
   }
+
+  getDownRankCell(cellIndex: VectorP) {
+    const nextRank = cellIndex.radius - 1 < 0 ? this.numRings - 1 : cellIndex.radius - 1;
+
+    let theta = Math.round(cellIndex.theta / this.getNumTilesInRing(cellIndex.radius) * this.getNumTilesInRing(nextRank));
+    if(theta === this.getNumTilesInRing(nextRank)) theta--;
+
+    cellIndex.radius = nextRank;
+    cellIndex.theta = theta;
+
+    return cellIndex;
+  }
 }
 
 export default PolarTileMap;

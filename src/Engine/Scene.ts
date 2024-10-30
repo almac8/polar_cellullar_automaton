@@ -4,31 +4,24 @@ import VectorP from "./VectorP";
 
 class Scene {
   private tilemap: PolarTileMap;
-  private cells: Array<VectorP>;
+  private activeCells: Array<VectorP>;
 
   constructor() {
     this.tilemap = new PolarTileMap(8, 32);
-    this.cells = new Array<VectorP>();
+    this.activeCells = new Array<VectorP>();
 
-    this.cells.push(new VectorP(0, 0));
-    this.cells.push(new VectorP(0, 1));
-    this.cells.push(new VectorP(0, 2));
-    this.cells.push(new VectorP(0, 3));
-    this.cells.push(new VectorP(0, 4));
-    this.cells.push(new VectorP(0, 5));
+    for(let i = 0; i < this.tilemap.getNumTilesInRing(this.tilemap.numRings - 1); i++) {
+      this.activeCells.push(new VectorP(this.tilemap.numRings - 1, i));
+    }
 
-    this.cells.forEach(cell => {
-      this.tilemap.setTileActive(cell, true);
-    });
+    this.activeCells.forEach(cell => this.tilemap.setTileActive(cell, true));
   }
   
   update(deltatime: number) {
     if(engineData.isRunning || engineData.runOnce) {
-      this.cells.forEach(cell => {
+      this.activeCells.forEach(cell => {
         this.tilemap.setTileActive(cell, false);
-        
-        cell = this.tilemap.getUprankCell(cell);
-        
+        cell = this.tilemap.getDownRankCell(cell);
         this.tilemap.setTileActive(cell, true);
       });
 
