@@ -31,6 +31,10 @@ class PolarTileRing {
   setTileActive(tileIndex: number, isActive: boolean) {
     this.tiles[tileIndex].setActive(isActive);
   }
+
+  setTileValue(tileIndex: number, value: number) {
+    this.tiles[tileIndex].setValue(value);
+  }
 }
 
 export default PolarTileRing;

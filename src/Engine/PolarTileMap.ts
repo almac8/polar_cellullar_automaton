@@ -26,6 +26,10 @@ class PolarTileMap {
     this.rings[tileIndex.radius].setTileActive(tileIndex.theta, isActive);
   }
 
+  setTileValue(tileIndex: VectorP, value: number) {
+    this.rings[tileIndex.radius].setTileValue(tileIndex.theta, value);
+  }
+
   getNumTilesInRing(ringIndex: number) {
     return this.rings[ringIndex].numTiles;
   }

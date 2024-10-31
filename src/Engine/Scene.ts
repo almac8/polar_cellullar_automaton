@@ -10,11 +10,10 @@ class Scene {
     this.tilemap = new PolarTileMap(8, 32);
     this.activeCells = new Array<VectorP>();
     
-    for(let i = 0; i < this.tilemap.getNumTilesInRing(31); i++) {
-      this.activeCells.push(new VectorP(this.tilemap.numRings - 1, i));
-    }
+    this.activeCells.push(new VectorP(10, 10));
 
     this.activeCells.forEach(cell => this.tilemap.setTileActive(cell, true));
+    this.activeCells.forEach(cell => this.tilemap.setTileValue(cell, 50));
   }
   
   update(deltatime: number) {

@@ -10,7 +10,7 @@ class PolarTile {
   private activeColor: string;
   private inactiveColor: string;
   private isActive: boolean;
-  private density: number;
+  private value: number;
 
   constructor(radius?: number, width?: number, startAngle?: number, endAngle?: number) {
     this.radius = radius ?? 0;
@@ -21,14 +21,14 @@ class PolarTile {
     this.activeColor = "#00FF00FF";
     this.inactiveColor = "#22222244";
     this.isActive = false;
-    this.density = 1;
+    this.value = 0;
   }
   
   render(renderingContext: CanvasRenderingContext2D) {
     if(this.isActive) {
       const origin = new Vector2(renderingContext.canvas.width / 2, renderingContext.canvas.height / 2);
       
-      for(let i = 0; i < this.density; i++) {
+      for(let i = 0; i < this.value; i++) {
         const randomRadius = Math.random() * ((this.radius + this.width / 2) - (this.radius - this.width / 2)) + (this.radius - this.width / 2);
         const randomTheta = (Math.random() * this.degreesToRadians(this.endAngle - this.startAngle)) + this.degreesToRadians(this.startAngle);
         
@@ -63,6 +63,10 @@ class PolarTile {
 
   setActive(isActive: boolean) {
     this.isActive = isActive;
+  }
+
+  setValue(value: number) {
+    this.value = value;
   }
 }
 
