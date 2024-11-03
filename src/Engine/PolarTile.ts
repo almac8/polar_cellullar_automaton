@@ -8,8 +8,6 @@ class PolarTile {
   private endAngle: number;
 
   private activeColor: string;
-  private inactiveColor: string;
-  private isActive: boolean;
   private value: number;
 
   constructor(radius?: number, width?: number, startAngle?: number, endAngle?: number) {
@@ -19,35 +17,23 @@ class PolarTile {
     this.endAngle = endAngle ?? 0;
   
     this.activeColor = "#00FF00FF";
-    this.inactiveColor = "#22222244";
-    this.isActive = false;
     this.value = 0;
   }
   
   render(renderingContext: CanvasRenderingContext2D) {
-    if(this.isActive) {
-      const origin = new Vector2(renderingContext.canvas.width / 2, renderingContext.canvas.height / 2);
+    const origin = new Vector2(renderingContext.canvas.width / 2, renderingContext.canvas.height / 2);
       
-      for(let i = 0; i < this.value; i++) {
-        const randomRadius = Math.random() * ((this.radius + this.width / 2) - (this.radius - this.width / 2)) + (this.radius - this.width / 2);
-        const randomTheta = (Math.random() * this.degreesToRadians(this.endAngle - this.startAngle)) + this.degreesToRadians(this.startAngle);
+    for(let i = 0; i < this.value; i++) {
+      const randomRadius = Math.random() * ((this.radius + this.width / 2) - (this.radius - this.width / 2)) + (this.radius - this.width / 2);
+      const randomTheta = (Math.random() * this.degreesToRadians(this.endAngle - this.startAngle)) + this.degreesToRadians(this.startAngle);
         
-        const pointP = new VectorP(randomRadius, randomTheta);
-        const pointV = this.polarToCartesian(pointP).add(origin);
+      const pointP = new VectorP(randomRadius, randomTheta);
+      const pointV = this.polarToCartesian(pointP).add(origin);
         
-        renderingContext.beginPath();
-        renderingContext.fillStyle = this.activeColor;
-        renderingContext.fillRect(pointV.x, pointV.y, 1, 1);
-      }
-    } else {
-      const origin = new Vector2(renderingContext.canvas.width / 2, renderingContext.canvas.height / 2);
-
       renderingContext.beginPath();
-      renderingContext.strokeStyle = this.isActive ? this.activeColor : this.inactiveColor;
-      renderingContext.lineWidth = this.width;
-      renderingContext.arc(origin.x, origin.y, this.radius, this.degreesToRadians(this.startAngle), this.degreesToRadians(this.endAngle));
-      renderingContext.stroke();
-    }
+      renderingContext.fillStyle = this.activeColor;
+      renderingContext.fillRect(pointV.x, pointV.y, 1, 1);
+      }
   }
 
   private degreesToRadians(degrees: number) {
@@ -59,10 +45,6 @@ class PolarTile {
       vector.radius * Math.cos(vector.theta),
       vector.radius * Math.sin(vector.theta)
     );
-  }
-
-  setActive(isActive: boolean) {
-    this.isActive = isActive;
   }
 
   setValue(value: number) {

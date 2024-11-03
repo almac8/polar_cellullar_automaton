@@ -28,10 +28,6 @@ class PolarTileRing {
     this.tiles.forEach(tile => tile.render(renderingContext));
   }
 
-  setTileActive(tileIndex: number, isActive: boolean) {
-    this.tiles[tileIndex].setActive(isActive);
-  }
-
   setTileValue(tileIndex: number, value: number) {
     this.tiles[tileIndex].setValue(value);
   }

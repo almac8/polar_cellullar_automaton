@@ -12,17 +12,11 @@ class Scene {
     
     this.activeCells.push(new VectorP(10, 10));
 
-    this.activeCells.forEach(cell => this.tilemap.setTileActive(cell, true));
     this.activeCells.forEach(cell => this.tilemap.setTileValue(cell, 50));
   }
   
   update(deltatime: number) {
     if(engineData.isRunning || engineData.runOnce) {
-      this.activeCells.forEach(cell => {
-        this.tilemap.setTileActive(cell, false);
-        cell = this.tilemap.getDownRankCell(cell);
-        this.tilemap.setTileActive(cell, true);
-      });
 
       engineData.setRunOnce(false);
     }
