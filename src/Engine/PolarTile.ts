@@ -8,7 +8,7 @@ class PolarTile {
   private endAngle: number;
 
   private activeColor: string;
-  private value: number;
+  value: number;
 
   constructor(radius?: number, width?: number, startAngle?: number, endAngle?: number) {
     this.radius = radius ?? 0;
@@ -45,10 +45,6 @@ class PolarTile {
       vector.radius * Math.cos(vector.theta),
       vector.radius * Math.sin(vector.theta)
     );
-  }
-
-  setValue(value: number) {
-    this.value = value;
   }
 }
 

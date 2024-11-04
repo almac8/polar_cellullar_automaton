@@ -22,12 +22,25 @@ class PolarTileMap {
     this.rings.forEach(ring => ring.render(renderingContext));
   }
 
+  getTileValue(tileIndex: VectorP) {
+    return this.rings[tileIndex.radius].getTileValue(tileIndex.theta);
+  }
+
   setTileValue(tileIndex: VectorP, value: number) {
     this.rings[tileIndex.radius].setTileValue(tileIndex.theta, value);
   }
 
   getNumTilesInRing(ringIndex: number) {
     return this.rings[ringIndex].numTiles;
+  }
+
+  getRetrogradeCell(cellIndex: VectorP) {
+    const newCellIndex = new VectorP();
+
+    newCellIndex.radius = cellIndex.radius;
+    newCellIndex.theta = cellIndex.theta === 0 ? this.getNumTilesInRing(cellIndex.radius) - 1 : cellIndex.theta - 1;
+
+    return newCellIndex;
   }
 
   getUprankCell(cellIndex: VectorP) {
