@@ -9,6 +9,7 @@ class PolarTile {
 
   private activeColor: string;
   value: number;
+  bufferValue: number;
 
   constructor(radius?: number, width?: number, startAngle?: number, endAngle?: number) {
     this.radius = radius ?? 0;
@@ -18,6 +19,7 @@ class PolarTile {
   
     this.activeColor = "#00FF00FF";
     this.value = 0;
+    this.bufferValue = 0;
   }
   
   render(renderingContext: CanvasRenderingContext2D) {

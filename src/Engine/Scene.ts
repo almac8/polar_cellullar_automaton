@@ -17,8 +17,14 @@ class Scene {
       for(let ringIndex = 0; ringIndex < this.tilemap.numRings; ringIndex++) {
         for(let tileIndex = 0; tileIndex < this.tilemap.getNumTilesInRing(ringIndex); tileIndex++) {
           const currentTileIndex = new VectorP(ringIndex, tileIndex);
+          this.updateTileBufferValue(currentTileIndex);
+        }
+      }
 
-          if(this.tilemap.getTileValue(currentTileIndex) > 0) this.updateTile(currentTileIndex);
+      for(let ringIndex = 0; ringIndex < this.tilemap.numRings; ringIndex++) {
+        for(let tileIndex = 0; tileIndex < this.tilemap.getNumTilesInRing(ringIndex); tileIndex++) {
+          const currentTileIndex = new VectorP(ringIndex, tileIndex);
+          this.flipTileBufferValue(currentTileIndex);
         }
       }
 
@@ -30,14 +36,19 @@ class Scene {
     this.tilemap.render(renderingContext);
   }
 
-  updateTile(tileIndex: VectorP) {
+  updateTileBufferValue(tileIndex: VectorP) {
     const tileValue = this.tilemap.getTileValue(tileIndex);
 
     const nextTileIndex = this.tilemap.getRetrogradeCell(tileIndex);
-    const nextTileValue = this.tilemap.getTileValue(nextTileIndex);
 
-    this.tilemap.setTileValue(tileIndex, 0);
-    this.tilemap.setTileValue(nextTileIndex, tileValue + nextTileValue);
+    this.tilemap.setTileBufferValue(nextTileIndex, tileValue);
+  }
+
+  flipTileBufferValue(tileIndex: VectorP) {
+    const bufferValue = this.tilemap.getTileBufferValue(tileIndex);
+    
+    this.tilemap.setTileBufferValue(tileIndex, 0);
+    this.tilemap.setTileValue(tileIndex, bufferValue);
   }
 }
 

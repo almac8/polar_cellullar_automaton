@@ -35,6 +35,14 @@ class PolarTileRing {
   setTileValue(tileIndex: number, value: number) {
     this.tiles[tileIndex].value = value;
   }
+
+  getTileBufferValue(tileIndex: number) {
+    return this.tiles[tileIndex].bufferValue;
+  }
+  
+  setTileBufferValue(tileIndex: number, value: number) {
+    this.tiles[tileIndex].bufferValue = value;
+  }
 }
 
 export default PolarTileRing;

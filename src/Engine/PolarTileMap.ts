@@ -29,6 +29,14 @@ class PolarTileMap {
   setTileValue(tileIndex: VectorP, value: number) {
     this.rings[tileIndex.radius].setTileValue(tileIndex.theta, value);
   }
+  
+  getTileBufferValue(tileIndex: VectorP) {
+    return this.rings[tileIndex.radius].getTileBufferValue(tileIndex.theta);
+  }
+
+  setTileBufferValue(tileIndex: VectorP, value: number) {
+    this.rings[tileIndex.radius].setTileBufferValue(tileIndex.theta, value);
+  }
 
   getNumTilesInRing(ringIndex: number) {
     return this.rings[ringIndex].numTiles;
