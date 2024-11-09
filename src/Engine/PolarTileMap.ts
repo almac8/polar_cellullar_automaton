@@ -51,6 +51,15 @@ class PolarTileMap {
     return newCellIndex;
   }
 
+  getProgradeCell(cellIndex: VectorP) {
+    const newCellIndex = new VectorP();
+
+    newCellIndex.radius = cellIndex.radius;
+    newCellIndex.theta = cellIndex.theta === this.getNumTilesInRing(cellIndex.radius) - 1 ? 0 : cellIndex.theta + 1;
+
+    return newCellIndex;
+  }
+
   getUprankCell(cellIndex: VectorP) {
     const nextRank = cellIndex.radius === this.numRings - 1 ? 0 : cellIndex.radius + 1;
     

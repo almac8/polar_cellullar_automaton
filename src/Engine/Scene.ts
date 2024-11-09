@@ -39,7 +39,7 @@ class Scene {
   updateTileBufferValue(tileIndex: VectorP) {
     const tileValue = this.tilemap.getTileValue(tileIndex);
 
-    const nextTileIndex = this.tilemap.getRetrogradeCell(tileIndex);
+    const nextTileIndex = this.tilemap.getProgradeCell(tileIndex);
 
     this.tilemap.setTileBufferValue(nextTileIndex, tileValue);
   }
