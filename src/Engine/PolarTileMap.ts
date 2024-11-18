@@ -61,24 +61,21 @@ class PolarTileMap {
   }
 
   getUprankCell(cellIndex: VectorP) {
-    const nextRank = cellIndex.radius === this.numRings - 1 ? 0 : cellIndex.radius + 1;
-    
-    cellIndex.theta = Math.round(cellIndex.theta / this.getNumTilesInRing(cellIndex.radius) * this.getNumTilesInRing(nextRank));
-    cellIndex.radius = nextRank;
+    const newRadius = cellIndex.radius === this.numRings - 1 ? 0 : cellIndex.radius + 1;
+    let newTheta = Math.round(cellIndex.theta / this.getNumTilesInRing(cellIndex.radius) * this.getNumTilesInRing(newRadius));
 
-    return cellIndex;
+    if(newTheta === this.getNumTilesInRing(newRadius)) newTheta--;
+
+    return new VectorP(newRadius, newTheta);
   }
 
   getDownRankCell(cellIndex: VectorP) {
-    const nextRank = cellIndex.radius - 1 < 0 ? this.numRings - 1 : cellIndex.radius - 1;
+    const newRadius = cellIndex.radius - 1 < 0 ? this.numRings - 1 : cellIndex.radius - 1;
+    let newTheta = Math.round(cellIndex.theta / this.getNumTilesInRing(cellIndex.radius) * this.getNumTilesInRing(newRadius));
 
-    let theta = Math.round(cellIndex.theta / this.getNumTilesInRing(cellIndex.radius) * this.getNumTilesInRing(nextRank));
-    if(theta === this.getNumTilesInRing(nextRank)) theta--;
+    if(newTheta === this.getNumTilesInRing(newRadius)) newTheta--;
 
-    cellIndex.radius = nextRank;
-    cellIndex.theta = theta;
-
-    return cellIndex;
+    return new VectorP(newRadius, newTheta);
   }
 }
 
